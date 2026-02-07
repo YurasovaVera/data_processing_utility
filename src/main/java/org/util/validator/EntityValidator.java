@@ -1,11 +1,15 @@
 package org.util.validator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import org.util.dto.ErrorInfo;
 import org.util.dto.ParsedEntry;
 
 public class EntityValidator {
+    private static final Set<Long> ids = new HashSet<>();
     public List<ErrorInfo> validateParsedEntry(ParsedEntry parsedEntry, int lineNumber) {
         List<ErrorInfo> errors = new ArrayList<>();
         errors.addAll(validateId(parsedEntry.id(), lineNumber));
@@ -18,6 +22,9 @@ public class EntityValidator {
         List<ErrorInfo> errors = new ArrayList<>();
         if (id < 1) {
             errors.add(new ErrorInfo(lineNumber, "Id must be greater than 0"));
+        }
+        if (!ids.add(id)) {
+            errors.add(new ErrorInfo(lineNumber, "Duplicate id"));
         }
         return errors;
     }

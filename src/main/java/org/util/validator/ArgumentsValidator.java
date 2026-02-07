@@ -9,6 +9,7 @@ public class ArgumentsValidator {
         validateFormat(format);
         validatePathExtension(path);
         validateFileExists(path);
+        validateFileNotDirectory(path);
     }
 
     private static void validateFormat(String format) {
@@ -28,6 +29,14 @@ public class ArgumentsValidator {
         String extension = path.substring(path.lastIndexOf(".") + 1);
         if (!extension.equals("txt")) {
             throw new IllegalArgumentException("path extension is not supported");
+        }
+    }
+
+    private static void validateFileNotDirectory(String file) {
+        Path path = Path.of(file);
+
+        if (!Files.isRegularFile(path)) {
+            throw new IllegalArgumentException("Path is not a file: " + file);
         }
     }
 }

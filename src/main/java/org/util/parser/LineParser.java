@@ -13,8 +13,8 @@ public class LineParser {
 
     private String[] splitLine(String line) {
         String[] tokens = line.split(";");
-        if (tokens.length < 3) {
-            throw new IllegalArgumentException("Not enough columns");
+        if (tokens.length != 3) {
+            throw new IllegalArgumentException("each entity should have 3 fields");
         }
         return tokens;
     }
