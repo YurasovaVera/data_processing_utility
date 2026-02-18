@@ -21,14 +21,14 @@ public class ArgumentsValidator {
     private static void validateFileExists(String file) {
         Path path = Path.of(file);
         if (!Files.exists(path)) {
-            throw new IllegalArgumentException("file does not exist");
+            throw new IllegalArgumentException("File does not exist");
         }
     }
 
     private static void validatePathExtension(String path) {
         String extension = path.substring(path.lastIndexOf(".") + 1);
         if (!extension.equals("txt")) {
-            throw new IllegalArgumentException("path extension is not supported");
+            throw new IllegalArgumentException("Path extension is not supported");
         }
     }
 
